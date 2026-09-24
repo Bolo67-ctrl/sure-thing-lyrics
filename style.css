@@ -5,7 +5,7 @@
 body {
   margin: 0;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   background: #0b0b0b;
   font-family: Arial, Helvetica, sans-serif;
@@ -13,56 +13,63 @@ body {
 
 #scene {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
-#startScreen {
+#controls {
   position: absolute;
-  top: 24px;
+  top: 18px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 20;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 10px 14px;
-  color: white;
-  background: rgba(0, 0, 0, 0.72);
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.76);
   border-radius: 18px;
 }
 
-#startScreen h1 {
-  margin: 0;
-  font-size: 22px;
+#controls h1 {
+  margin: 0 8px 0 0;
+  color: white;
+  font-size: 20px;
   white-space: nowrap;
 }
 
-#startScreen p {
-  display: none;
-}
-
-#startBtn {
-  margin: 0;
-  padding: 11px 24px;
+button {
   border: 0;
   border-radius: 999px;
-  background: white;
-  color: black;
-  font-size: 14px;
+  padding: 10px 18px;
   font-weight: 800;
   cursor: pointer;
 }
 
-#startBtn:disabled {
-  opacity: 0.6;
+#startBtn,
+#markBtn,
+#testBtn {
+  background: white;
+  color: black;
+}
+
+#syncBtn,
+#undoBtn,
+#copyBtn {
+  background: #272727;
+  color: white;
+  border: 1px solid #555;
+}
+
+button:disabled {
+  opacity: 0.45;
   cursor: default;
 }
 
 #lyricBoxes {
   width: 100%;
   height: 100%;
-  padding: 11vh 5vw 5vh;
+  padding: 12vh 5vw 20vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,8 +80,8 @@ body {
   width: min(40vw, 430px);
   aspect-ratio: 1 / 1;
   flex: 0 0 auto;
-  background: #fff;
-  color: #000;
+  background: white;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,42 +94,90 @@ body {
   font-size: clamp(22px, 3vw, 42px);
   font-weight: 800;
   line-height: 1.12;
-  opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity 160ms ease,
-    transform 160ms ease;
+  opacity: 1;
 }
 
-.lyric-text.show {
-  opacity: 1;
-  transform: translateY(0);
+#syncPanel {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 30;
+  width: min(92vw, 900px);
+  display: none;
+  padding: 14px;
+  color: white;
+  background: rgba(0, 0, 0, 0.88);
+  border: 1px solid #333;
+  border-radius: 18px;
+  text-align: center;
+}
+
+#syncPanel.active {
+  display: block;
+}
+
+#syncTime {
+  font-size: 26px;
+  font-weight: 900;
+}
+
+#syncLabel {
+  margin-top: 4px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+#syncLine {
+  margin: 10px auto;
+  min-height: 48px;
+  font-size: clamp(16px, 2.3vw, 24px);
+  font-weight: 800;
+}
+
+.sync-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#syncStatus {
+  min-height: 18px;
+  margin-top: 8px;
+  color: #aaa;
+  font-size: 12px;
 }
 
 @media (max-width: 700px) {
-  #startScreen {
-    top: 12px;
+  #controls {
+    top: 8px;
+    width: 96vw;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
-  #startScreen h1 {
+  #controls h1 {
+    width: 100%;
+    text-align: center;
     font-size: 17px;
-  }
-
-  #startBtn {
-    padding: 9px 18px;
   }
 
   #lyricBoxes {
     flex-direction: column;
-    padding: 10vh 6vw 3vh;
+    padding: 18vh 6vw 28vh;
     gap: 14px;
   }
 
   .lyric-box {
-    width: min(72vw, 290px);
+    width: min(70vw, 280px);
   }
 
   .lyric-text {
-    font-size: clamp(20px, 7vw, 31px);
+    font-size: clamp(20px, 7vw, 30px);
+  }
+
+  #syncPanel {
+    bottom: 8px;
   }
 }
