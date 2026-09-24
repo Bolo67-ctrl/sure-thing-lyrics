@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sure Thing Animation</title>
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 
 <body>
@@ -12,7 +12,6 @@
     <div id="controls">
       <h1>Sure Thing</h1>
       <button id="startBtn">START</button>
-      <button id="syncBtn">SYNC TIMING</button>
     </div>
 
     <div id="lyricBoxes" aria-live="polite">
@@ -24,24 +23,9 @@
         <span class="lyric-text"></span>
       </div>
     </div>
-
-    <div id="syncPanel">
-      <div id="syncTime">0.00s</div>
-      <div id="syncLabel">Press SYNC TIMING to calibrate.</div>
-      <div id="syncLine"></div>
-
-      <div class="sync-actions">
-        <button id="markBtn">MARK NEXT</button>
-        <button id="undoBtn">UNDO</button>
-        <button id="testBtn">TEST SYNC</button>
-        <button id="copyBtn">COPY TIMINGS</button>
-      </div>
-
-      <div id="syncStatus"></div>
-    </div>
   </div>
 
   <audio id="song" src="sure-thing.mp3" preload="auto"></audio>
-  <script src="script.js?v=5"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>
