@@ -7,82 +7,115 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 70%, #202020 0%, #090909 45%, #000 100%);
+  background: #0b0b0b;
   font-family: Arial, Helvetica, sans-serif;
-  color: white;
 }
 
 #scene {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 
 #startScreen {
   position: absolute;
   inset: 0;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  color: white;
+  background: #0b0b0b;
 }
 
 #startScreen h1 {
-  font-size: 60px;
   margin: 0;
+  font-size: 60px;
 }
 
 #startScreen p {
+  margin: 10px 0 0;
   color: #aaa;
-  margin-top: 10px;
 }
 
 #startBtn {
   margin-top: 25px;
   padding: 14px 35px;
-  border: none;
+  border: 0;
   border-radius: 30px;
+  background: white;
+  color: black;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 800;
   cursor: pointer;
 }
 
-.lyric-card {
-  position: absolute;
-  left: 50%;
-  bottom: -30px;
-  transform: translateX(-50%) scale(0.98);
-  min-width: 300px;
-  max-width: 650px;
-  padding: 18px 28px;
-  background: rgba(30, 30, 30, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 18px;
-  text-align: center;
-  font-size: 24px;
-  font-weight: 600;
-  backdrop-filter: blur(15px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  animation: rise 6s linear forwards;
+#startBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 
-@keyframes rise {
-  0% {
-    bottom: -30px;
-    opacity: 1;
-    transform: translateX(-50%) scale(0.98);
+#lyricBoxes {
+  width: 100%;
+  height: 100%;
+  padding: 6vh 5vw;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 4vw, 60px);
+}
+
+#lyricBoxes.active {
+  display: flex;
+}
+
+.lyric-box {
+  width: min(40vw, 430px);
+  aspect-ratio: 1 / 1;
+  flex: 0 0 auto;
+  background: #fff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(22px, 4vw, 48px);
+  text-align: center;
+  overflow: hidden;
+}
+
+.lyric-text {
+  font-size: clamp(22px, 3vw, 42px);
+  font-weight: 800;
+  line-height: 1.12;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.lyric-text.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+  #startScreen h1 {
+    font-size: 44px;
   }
 
-  80% {
-    opacity: 1;
+  #lyricBoxes {
+    flex-direction: column;
+    padding: 3vh 6vw;
+    gap: 16px;
   }
 
-  100% {
-    bottom: 110%;
-    opacity: 0;
-    transform: translateX(-50%) scale(1.05);
+  .lyric-box {
+    width: min(78vw, 330px);
+  }
+
+  .lyric-text {
+    font-size: clamp(20px, 7vw, 31px);
   }
 }
