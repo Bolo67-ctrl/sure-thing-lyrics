@@ -2,8 +2,7 @@ const startBtn = document.getElementById("startBtn");
 const startScreen = document.getElementById("startScreen");
 const cardsContainer = document.getElementById("cards");
 const song = document.getElementById("song");
-// Temporary text so we can build/test the animation.
-// We'll replace these with your chosen song section later.
+
 const cards = [
   { time: 0, text: "First card" },
   { time: 1200, text: "Second card" },
@@ -13,33 +12,33 @@ const cards = [
 ];
 
 function createCard(text) {
-
   const card = document.createElement("div");
-
   card.className = "lyric-card";
   card.textContent = text;
-
-  // Give each card a slightly different horizontal position.
-  const position = 35 + Math.random() * 30;
-
-  card.style.left = `${position}%`;
-
+  card.style.left = `${35 + Math.random() * 30}%`;
   cardsContainer.appendChild(card);
 
-  setTimeout(() => {
-    card.remove();
-  }, 6500);
+  setTimeout(() => card.remove(), 6500);
 }
 
-function startAnimation() {
-  startScreen.style.display = "none";
+async function startAnimation() {
+  startBtn.disabled = true;
 
-  song.currentTime = 0;
-  song.play();
+  try {
+    song.pause();
+    song.currentTime = 0;
+    await song.play();
 
-  cards.forEach(card => {
-    setTimeout(() => {
-      createCard(card.text);
-    }, card.time);
-  });
+    startScreen.style.display = "none";
+
+    cards.forEach((card) => {
+      setTimeout(() => createCard(card.text), card.time);
+    });
+  } catch (error) {
+    console.error("Audio playback failed:", error);
+    startBtn.disabled = false;
+    alert("Audio could not play. Refresh the page and press START again.");
+  }
 }
+
+startBtn.addEventListener("click", startAnimation);
