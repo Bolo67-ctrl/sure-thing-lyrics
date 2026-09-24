@@ -1,62 +1,44 @@
 const startBtn = document.getElementById("startBtn");
 const song = document.getElementById("song");
+const lyricText = document.querySelector("#box1 .lyric-text");
 
-const box1 = document.querySelector("#box1 .lyric-text");
-const box2 = document.querySelector("#box2 .lyric-text");
-
+// First line stays exactly where it was.
+// Every line after it is delayed slightly.
 const cards = [
-  { time: 650, box: 1, text: "This love between you and I is simple as pie, baby" },
-  { time: 4330, box: 2, text: "Yeah, it's such a sure thing" },
-  { time: 5910, box: 1, text: "it's such a sure thing" },
-  { time: 7780, box: 2, text: "Oh, it such a sure thing" },
-  { time: 9550, box: 1, text: "it's such a sure thing" },
-  { time: 11970, box: 2, text: "Even when The sky comes falling" },
-  { time: 14380, box: 1, text: "Even when The sun don't shine" },
-  { time: 16430, box: 2, text: "You could bet that, never gotta sweat that" },
-  { time: 18400, box: 1, text: "I got faith in you and I" },
-  { time: 21550, box: 2, text: "So put your pretty little hand in mine" }
+  { time: 650, text: "This love between you and I is simple as pie, baby" },
+  { time: 4580, text: "Yeah, it's such a sure thing" },
+  { time: 6160, text: "it's such a sure thing" },
+  { time: 8030, text: "Oh, it such a sure thing" },
+  { time: 9800, text: "it's such a sure thing" },
+  { time: 12220, text: "Even when The sky comes falling" },
+  { time: 14630, text: "Even when The sun don't shine" },
+  { time: 16680, text: "You could bet that, never gotta sweat that" },
+  { time: 18650, text: "I got faith in you and I" },
+  { time: 21800, text: "So put your pretty little hand in mine" }
 ];
 
 let timers = [];
 
-function getBox(boxNumber) {
-  return boxNumber === 1 ? box1 : box2;
-}
-
-function fadeInText(boxNumber, text) {
-  const target = getBox(boxNumber);
-
-  target.classList.remove("visible");
-  target.textContent = text;
+function fadeInText(text) {
+  lyricText.classList.remove("visible");
+  lyricText.textContent = text;
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      target.classList.add("visible");
+      lyricText.classList.add("visible");
     });
   });
 }
 
-function fadeOutText(boxNumber) {
-  getBox(boxNumber).classList.remove("visible");
+function fadeOutText() {
+  lyricText.classList.remove("visible");
 }
 
 function resetAnimation() {
   timers.forEach(clearTimeout);
   timers = [];
-
-  [box1, box2].forEach((box) => {
-    box.classList.remove("visible");
-    box.textContent = "";
-  });
-}
-
-function nextTimeForSameBox(index) {
-  for (let i = index + 1; i < cards.length; i++) {
-    if (cards[i].box === cards[index].box) {
-      return cards[i].time;
-    }
-  }
-  return null;
+  lyricText.classList.remove("visible");
+  lyricText.textContent = "";
 }
 
 async function startAnimation() {
@@ -72,25 +54,24 @@ async function startAnimation() {
     cards.forEach((card, index) => {
       timers.push(
         setTimeout(() => {
-          fadeInText(card.box, card.text);
+          fadeInText(card.text);
         }, card.time)
       );
 
-      const nextTime = nextTimeForSameBox(index);
+      const nextTime = cards[index + 1]?.time;
       const fadeOutAt = nextTime
-        ? Math.max(card.time + 900, nextTime - 450)
+        ? Math.max(card.time + 900, nextTime - 380)
         : card.time + 2600;
 
       timers.push(
         setTimeout(() => {
-          fadeOutText(card.box);
+          fadeOutText();
         }, fadeOutAt)
       );
     });
 
     song.addEventListener("ended", () => {
-      fadeOutText(1);
-      fadeOutText(2);
+      fadeOutText();
       startBtn.disabled = false;
     }, { once: true });
 
