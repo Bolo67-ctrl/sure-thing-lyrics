@@ -6,15 +6,15 @@ const lyricText = document.querySelector("#box1 .lyric-text");
 // Every line after it is delayed slightly.
 const cards = [
   { time: 650, text: "This love between you and I is simple as pie, baby" },
-  { time: 4580, text: "Yeah, it's such a sure thing" },
-  { time: 6160, text: "it's such a sure thing" },
-  { time: 8030, text: "Oh, it such a sure thing" },
-  { time: 9800, text: "it's such a sure thing" },
-  { time: 12220, text: "Even when The sky comes falling" },
-  { time: 14630, text: "Even when The sun don't shine" },
-  { time: 16680, text: "You could bet that, never gotta sweat that" },
-  { time: 18650, text: "I got faith in you and I" },
-  { time: 21800, text: "So put your pretty little hand in mine" }
+  { time: 5000, text: "Yeah, it's such a sure thing" },
+  { time: 6500, text: "it's such a sure thing" },
+  { time: 8150, text: "Oh, it such a sure thing" },
+  { time: 9750, text: "it's such a sure thing" },
+  { time: 14400, text: "Even when The sky comes falling" },
+  { time: 16400, text: "Even when The sun don't shine" },
+  { time: 18150, text: "You could bet that, never gotta sweat that" },
+  { time: 19550, text: "I got faith in you and I" },
+  { time: 22700, text: "So put your pretty little hand in mine" }
 ];
 
 let timers = [];
