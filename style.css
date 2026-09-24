@@ -23,12 +23,10 @@ body {
 #startScreen {
   position: absolute;
   inset: 0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   z-index: 10;
 }
 
@@ -44,59 +42,38 @@ body {
 
 #startBtn {
   margin-top: 25px;
-
   padding: 14px 35px;
-
   border: none;
   border-radius: 30px;
-
   font-size: 16px;
   font-weight: bold;
-
   cursor: pointer;
 }
 
 .lyric-card {
   position: absolute;
-
   left: 50%;
-  bottom: -150px;
-
-  transform: translateX(-50%);
-
+  bottom: -30px;
+  transform: translateX(-50%) scale(0.98);
   min-width: 300px;
   max-width: 650px;
-
   padding: 18px 28px;
-
   background: rgba(30, 30, 30, 0.9);
-
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 18px;
-
   text-align: center;
-
   font-size: 24px;
   font-weight: 600;
-
   backdrop-filter: blur(15px);
-
-  box-shadow:
-    0 10px 40px rgba(0, 0, 0, 0.5);
-
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   animation: rise 6s linear forwards;
 }
 
 @keyframes rise {
-
   0% {
-    bottom: -150px;
-    opacity: 0;
-    transform: translateX(-50%) scale(0.9);
-  }
-
-  15% {
+    bottom: -30px;
     opacity: 1;
+    transform: translateX(-50%) scale(0.98);
   }
 
   80% {
