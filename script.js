@@ -6,7 +6,7 @@ const song = document.getElementById("song");
 // Timing is in milliseconds from the start of sure-thing.mp3.
 // We can fine-tune these after the first preview.
 const cards = [
-  { time: 0, text: "This love between you and I is simple as pie, baby" },
+  { time: 1000, text: "This love between you and I is simple as pie, baby" },
   { time: 4300, text: "Yeah, it's such a sure thing" },
   { time: 6000, text: "it's such a sure thing" },
   { time: 7600, text: "Oh, it such a sure thing" },
