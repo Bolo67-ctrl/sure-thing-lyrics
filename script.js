@@ -4,7 +4,6 @@ const song = document.getElementById("song");
 const box1 = document.querySelector("#box1 .lyric-text");
 const box2 = document.querySelector("#box2 .lyric-text");
 
-// Timings matched to the uploaded audio clip.
 const cards = [
   { time: 650, box: 1, text: "This love between you and I is simple as pie, baby" },
   { time: 4330, box: 2, text: "Yeah, it's such a sure thing" },
@@ -20,17 +19,44 @@ const cards = [
 
 let timers = [];
 
-function putText(boxNumber, text) {
-  const target = boxNumber === 1 ? box1 : box2;
+function getBox(boxNumber) {
+  return boxNumber === 1 ? box1 : box2;
+}
+
+function fadeInText(boxNumber, text) {
+  const target = getBox(boxNumber);
+
+  target.classList.remove("visible");
   target.textContent = text;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      target.classList.add("visible");
+    });
+  });
+}
+
+function fadeOutText(boxNumber) {
+  getBox(boxNumber).classList.remove("visible");
 }
 
 function resetAnimation() {
   timers.forEach(clearTimeout);
   timers = [];
 
-  box1.textContent = "";
-  box2.textContent = "";
+  [box1, box2].forEach((box) => {
+    box.classList.remove("visible");
+    box.textContent = "";
+  });
+}
+
+function nextTimeForSameBox(index) {
+  for (let i = index + 1; i < cards.length; i++) {
+    if (cards[i].box === cards[index].box) {
+      return cards[i].time;
+    }
+  }
+  return null;
 }
 
 async function startAnimation() {
@@ -43,15 +69,28 @@ async function startAnimation() {
   try {
     await song.play();
 
-    cards.forEach((card) => {
-      const timer = setTimeout(() => {
-        putText(card.box, card.text);
-      }, card.time);
+    cards.forEach((card, index) => {
+      timers.push(
+        setTimeout(() => {
+          fadeInText(card.box, card.text);
+        }, card.time)
+      );
 
-      timers.push(timer);
+      const nextTime = nextTimeForSameBox(index);
+      const fadeOutAt = nextTime
+        ? Math.max(card.time + 900, nextTime - 450)
+        : card.time + 2600;
+
+      timers.push(
+        setTimeout(() => {
+          fadeOutText(card.box);
+        }, fadeOutAt)
+      );
     });
 
     song.addEventListener("ended", () => {
+      fadeOutText(1);
+      fadeOutText(2);
       startBtn.disabled = false;
     }, { once: true });
 
