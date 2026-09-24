@@ -60,11 +60,10 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(18px, 4vw, 60px);
 }
 
 .lyric-box {
-  width: min(40vw, 430px);
+  width: min(58vw, 520px);
   aspect-ratio: 1 / 1;
   flex: 0 0 auto;
   background: white;
@@ -72,13 +71,13 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(22px, 4vw, 48px);
+  padding: clamp(28px, 5vw, 58px);
   text-align: center;
   overflow: hidden;
 }
 
 .lyric-text {
-  font-size: clamp(22px, 3vw, 42px);
+  font-size: clamp(24px, 3.4vw, 46px);
   font-weight: 800;
   line-height: 1.12;
   opacity: 0;
@@ -120,16 +119,14 @@ button:disabled {
   }
 
   #lyricBoxes {
-    flex-direction: column;
-    padding: 18vh 6vw 5vh;
-    gap: 14px;
+    padding: 16vh 6vw 5vh;
   }
 
   .lyric-box {
-    width: min(70vw, 280px);
+    width: min(82vw, 340px);
   }
 
   .lyric-text {
-    font-size: clamp(20px, 7vw, 30px);
+    font-size: clamp(21px, 7vw, 32px);
   }
 }
