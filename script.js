@@ -7,14 +7,14 @@ const lyricText = document.querySelector("#box1 .lyric-text");
 const cards = [
   { time: 650, text: "This love between you and I is simple as pie, baby" },
   { time: 6050, text: "Yeah, it's such a sure thing" },
-  { time: 7100, text: "it's such a sure thing" },
-  { time: 8300, text: "Oh, it such a sure thing" },
-  { time: 9900, text: "it's such a sure thing" },
-  { time: 14550, text: "Even when The sky comes falling" },
-  { time: 16550, text: "Even when The sun don't shine" },
-  { time: 18300, text: "You could bet that, never gotta sweat that" },
-  { time: 20100, text: "I got faith in you and I" },
-  { time: 22850, text: "So put your pretty little hand in mine" }
+  { time: 7200, text: "it's such a sure thing" },
+  { time: 8400, text: "Oh, it such a sure thing" },
+  { time: 10000, text: "it's such a sure thing" },
+  { time: 15050, text: "Even when The sky comes falling" },
+  { time: 17050, text: "Even when The sun don't shine" },
+  { time: 18400, text: "You could bet that, never gotta sweat that" },
+  { time: 20200, text: "I got faith in you and I" },
+  { time: 23100, text: "So put your pretty little hand in mine" }
 ];
 
 let timers = [];
