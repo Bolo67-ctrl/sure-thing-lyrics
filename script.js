@@ -8,7 +8,14 @@ const song = document.getElementById("song");
 const cards = [
   { time: 0, text: "This love between you and I is simple as pie, baby" },
   { time: 4300, text: "Yeah, it's such a sure thing (it's such a sure thing)" },
-  { time: 7600, text: "Oh, it such a sure thing (it's such a sure thing)" }
+  { time: 7600, text: "Oh, it such a sure thing (it's such a sure thing)" },
+  { time: 10500, text: "Even when (you could bet that, never gotta sweat that)" },
+  { time: 12600, text: "The sky comes falling" },
+  { time: 14500, text: "Even when (you could bet that, never gotta sweat that)" },
+  { time: 16600, text: "The sun don't shine" },
+  { time: 18500, text: "(You could bet that, never gotta sweat that)" },
+  { time: 20400, text: "I got faith in you and I" },
+  { time: 22600, text: "So put your pretty little hand in mine" }
 ];
 
 function createCard(text) {
