@@ -1,10 +1,14 @@
 const startBtn = document.getElementById("startBtn");
 const startScreen = document.getElementById("startScreen");
-const cardsContainer = document.getElementById("cards");
+const lyricBoxes = document.getElementById("lyricBoxes");
 const song = document.getElementById("song");
 
+const boxTexts = [
+  document.querySelector("#box1 .lyric-text"),
+  document.querySelector("#box2 .lyric-text")
+];
+
 // Timing is in milliseconds from the start of sure-thing.mp3.
-// We can fine-tune these after the first preview.
 const cards = [
   { time: 1000, text: "This love between you and I is simple as pie, baby" },
   { time: 4300, text: "Yeah, it's such a sure thing" },
@@ -18,18 +22,32 @@ const cards = [
   { time: 22500, text: "So put your pretty little hand in mine" }
 ];
 
-function createCard(text) {
-  const card = document.createElement("div");
-  card.className = "lyric-card";
-  card.textContent = text;
-  card.style.left = `${35 + Math.random() * 30}%`;
-  cardsContainer.appendChild(card);
+let timers = [];
 
-  setTimeout(() => card.remove(), 6500);
+function showText(boxIndex, text) {
+  const target = boxTexts[boxIndex];
+
+  target.classList.remove("show");
+
+  setTimeout(() => {
+    target.textContent = text;
+    target.classList.add("show");
+  }, 90);
+}
+
+function clearAnimation() {
+  timers.forEach(clearTimeout);
+  timers = [];
+
+  boxTexts.forEach((target) => {
+    target.textContent = "";
+    target.classList.remove("show");
+  });
 }
 
 async function startAnimation() {
   startBtn.disabled = true;
+  clearAnimation();
 
   try {
     song.pause();
@@ -37,9 +55,14 @@ async function startAnimation() {
     await song.play();
 
     startScreen.style.display = "none";
+    lyricBoxes.classList.add("active");
 
-    cards.forEach((card) => {
-      setTimeout(() => createCard(card.text), card.time);
+    cards.forEach((card, index) => {
+      const timer = setTimeout(() => {
+        showText(index % 2, card.text);
+      }, card.time);
+
+      timers.push(timer);
     });
   } catch (error) {
     console.error("Audio playback failed:", error);
